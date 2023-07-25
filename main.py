@@ -8,8 +8,8 @@ def hex(rgb):
     return '#{:02x}{:02x}{:02x}'.format(rgb[0], rgb[1], rgb[2])
 if not os.path.isdir("output"):
     os.mkdir("output")
-for filename in os.listdir("frames"):
-    f = os.path.join("frames", filename)
+for frame in range(len(os.listdir('frames'))):
+    f = os.path.join("frames", f"{str(frame)}.png")
     if os.path.isfile(f):
         data["totalframes"] += 1
         print(data["totalframes"])
