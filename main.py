@@ -13,7 +13,7 @@ for filename in os.listdir("frames"):
     if os.path.isfile(f):
         data["totalframes"] += 1
         print(data["totalframes"])
-        if len(batch) == 150:
+        if len(batch) == 50:
             print(f"dumping batch {str(data['batches'])}...")
             with open(os.path.join("output", f"batch{str(data['batches'])}.json"), "w") as file:
                 json.dump(batch, file)
