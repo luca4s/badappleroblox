@@ -4,8 +4,11 @@ import json
 from PIL import Image
 data = {"fps": 30, "batches": 1, "totalframes": 0} # change the number to the FPS of your video, the video i used has 30 so ykwtd
 batch = {}
-def hex(rgb):
-    return '#{:02x}{:02x}{:02x}'.format(rgb[0], rgb[1], rgb[2])
+def closest(rgb):
+    avg = (rgb[0] + rgb[1] + rgb[2]) / 3
+    if avg > 127.5:
+        return 1
+    return 0
 if not os.path.isdir("output"):
     os.mkdir("output")
 for frame in range(len(os.listdir('frames'))):
@@ -24,7 +27,7 @@ for frame in range(len(os.listdir('frames'))):
         pix = img.load()
         def set(x, y):
             try:
-                batch[str(data["totalframes"])][f"{str(x)},{str(y)}"] = hex(pix[x, y])
+                batch[str(data["totalframes"])][f"{str(x)},{str(y)}"] = closest(pix[x, y])
             except Exception as e:
                 input(f"[err] {e}, press ENTER to try again.")
                 set(x, y)
